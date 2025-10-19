@@ -12,18 +12,20 @@
 <body>
   <div id="app">
     <!-- <img v-bind:src="blog_mathslessonplanning-1.webp"  alt="This is the school lessons"> -->
+    <!--This is connected to the site name in my js-->
     <h1>{{site}}</h1>
     <div v-for="lesson in lessons" :key="lesson.id">
+      <!--lessons detailed connected-->
       <h2>{{lesson.title}}</h2>
       <p>{{lesson.description}}</p> <!---->
       <p>Price: {{lesson.price}}</p> <!--better syntax practice than 'vtext'-->
       <!--Like onclick but in vue syntax works as event listener-->
-      <button v-on:click="addToCart">
-        Add to cart
-      </button>
+      <!--using this to create my button-->
+      <button v-on:click="addToCart(lesson)" :disabled="lesson.availability===0">Add to cart</button>
     </div>
   </div>
 
+  <!--connected my sript to the bottom so everything on html is processed first-->
   <script src="lesson.js"></script>
 </body>
 
