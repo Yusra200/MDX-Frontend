@@ -16,7 +16,17 @@
   <div id="app">
     <h1>{{site}}</h1>
 
+    <!--Sorting function-->
+    <div id="sort">
+      <button v-on:click="Asc">Ascending</button>
+      <button v-on:click="Desc">Descending</button>
+    </div>
+
     <p> Items in cart:{{cartItemAmount}}</p> <!--counting how many items in cart-->
+    <!--if button has 0 items and if its on lesson page it will be disabled-->
+    <!--similiar to event listener which runs whatever function-->
+    <button v-on:click="goToCheckout" :disabled="cart.length === 0 && showLessons">
+      <i class="fa-solid fa-cart-shopping"></i>
     </button>
 
     <main>

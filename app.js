@@ -3,7 +3,7 @@ const { createApp } = Vue;
 const app = createApp({
   data() {
     return {
-      site: 'School Lessons',
+      site: 'Vue.js School Lessons',
       //presenting all the lessons
       lessons: [
         { id: 10, title: 'Maths', availability: 5, location: 'London', price: 10 },
@@ -19,12 +19,28 @@ const app = createApp({
       ],
       //array stores any lessons that is added to cart
       cart: [],
-    
+      //show lessons, if not then take to checkout page
+      showLessons: true,
       //user information for checkout
       firstName: '',
       lastName: '',
       phoneNumber: ''
     };
+  },
+  computed: {
+    cartItemAmount() {
+      //return items in cart or display nothing
+      return this.cart.length || "";
+    },
+  },
+  methods: {
+    addToCart(lesson) {
+      //if there are no avaliblity left return
+      if (lesson.availability <= 0) return;
+      //if there availiablity then take one
+      lesson.availability--;
+      this.cart.push(lesson.id); //push lesson id to the cart
+    },
   }
 });
 //vue connect js to html
