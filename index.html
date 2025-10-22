@@ -5,28 +5,40 @@
   <meta charset="UTF-8">
   <title>School Lessons</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!--script tag for this version-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <!--Vue3 script tag-->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
 </head>
 
 <body>
+  <!--connecting html to vue-->
   <div id="app">
-    <!-- <img v-bind:src="blog_mathslessonplanning-1.webp"  alt="This is the school lessons"> -->
-    <!--This is connected to the site name in my js-->
     <h1>{{site}}</h1>
-    <div v-for="lesson in lessons" :key="lesson.id">
-      <!--lessons detailed connected-->
-      <h2>{{lesson.title}}</h2>
-      <p>{{lesson.description}}</p> <!---->
-      <p>Price: {{lesson.price}}</p> <!--better syntax practice than 'vtext'-->
-      <!--Like onclick but in vue syntax works as event listener-->
-      <!--using this to create my button-->
-      <button v-on:click="addToCart(lesson)" :disabled="lesson.availability===0">Add to cart</button>
-    </div>
-  </div>
 
-  <!--connected my sript to the bottom so everything on html is processed first-->
-  <script src="lesson.js"></script>
+    <p> Items in cart:{{cartItemAmount}}</p> <!--counting how many items in cart-->
+    </button>
+
+    <main>
+      <!--Lessons page visible if showlessons is true-->
+      <div v-if="showLessons">
+        <div v-for="lesson in lessons" :key="lesson.id">
+          <h2>Lesson: {{lesson.title}}</h2>
+          <p>Availability:{{lesson.availability}}</p>
+          <p>Location:{{lesson.location}}</p>
+          <p>Price: {{lesson.price}}</p> <!--better syntax practice than 'vtext'-->
+
+          <!--ADD TO CART BUTTONS linked to addToCart-->
+          <button v-on:click="addToCart(lesson)" :disabled="lesson.availability===0">Add to cart</button>
+          <!--disabled function-->
+        </div>
+      </div>
+
+    
+    </main>
+
+  </div>
+  <script src="app.js"></script>
 </body>
 
 </html>
