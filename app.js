@@ -32,6 +32,14 @@ const app = createApp({
       //return items in cart or display nothing
       return this.cart.length || "";
     },
+    fullName() {
+      //combines names and called method to create into single string
+      return [this.firstName, this.lastName
+      ].join(' ');
+    },
+    sortBy(){
+      
+    }
   },
   methods: {
     addToCart(lesson) {
@@ -40,6 +48,14 @@ const app = createApp({
       //if there availiablity then take one
       lesson.availability--;
       this.cart.push(lesson.id); //push lesson id to the cart
+    },
+    goToCheckout() {
+      //between pages
+      this.showLessons = this.showLessons ? false : true;
+    },
+    checkoutInfo() {
+      //display after button is clicked in checkout 
+      alert("Checkout completed")
     },
   }
 });
