@@ -3,7 +3,7 @@ const { createApp } = Vue;
 const app = createApp({
   data() {
     return {
-      site: 'Vue.js School Lessons',
+      site: 'School Lessons',
       //presenting all the lessons
       lessons: [
         { id: 10, title: 'Maths', availability: 5, location: 'London', price: 10 },
@@ -37,8 +37,8 @@ const app = createApp({
       return [this.firstName, this.lastName
       ].join(' ');
     },
-    sortBy(){
-      
+    sortBy() {
+
     }
   },
   methods: {

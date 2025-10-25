@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>School Lessons</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
   <!--Vue3 script tag-->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -13,58 +14,64 @@
 <body>
   <!--connecting html to vue-->
   <div id="app">
-    <h1>{{site}}</h1>
-
-    <!--Sorting function-->
-    <div id="sort">
-      <button v-on:click="Asc">Ascending</button>
-      <button v-on:click="Desc">Descending</button>
+    <div class="header">
+      <h1>{{site}}</h1>
     </div>
 
-    <p> Items in cart:{{cartItemAmount}}</p> <!--counting how many items in cart-->
+
+
+
+
+    
     <!--if button has 0 items and if its on lesson page it will be disabled-->
     <!--similiar to event listener which runs whatever function-->
-    <button v-on:click="goToCheckout" :disabled="cart.length === 0 && showLessons">
-      <i class="fa-solid fa-cart-shopping"></i>
-      <span v-if="showLessons">Check out ({{ cart.length }})</span>
-      <span v-else>Back to lessons</span>
-    </button>
+    <div class="checkoutBtn">
+      <button v-on:click="goToCheckout" :disabled="cart.length === 0 && showLessons">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span v-if="showLessons">Check out ({{ cart.length }})</span>
+        <span v-else>Back to lessons</span>
+      </button>
+    </div>
 
     <main>
       <!--Lessons page visible if showlessons is true-->
-      <div v-if="showLessons">
-        <div v-for="lesson in lessons" :key="lesson.id">
-          <h2>Lesson: {{lesson.title}}</h2>
+      <div v-if="showLessons" class="lessonWrap">
+        <div v-for="lesson in lessons" :key="lesson.id" class="lessonBox">
+          <div class="headtwo">
+            <h2>{{lesson.title}}</h2>
+          </div>
           <p>Availability:{{lesson.availability}}</p>
           <p>Location:{{lesson.location}}</p>
           <p>Price: {{lesson.price}}</p> <!--better syntax practice than 'vtext'-->
-
           <!--ADD TO CART BUTTONS linked to addToCart-->
-          <button v-on:click="addToCart(lesson)" :disabled="lesson.availability===0">Add to cart</button>
+          <button class="addBtn" v-on:click="addToCart(lesson)" :disabled="lesson.availability===0">
+            Add to cart
+          </button>
           <!--disabled function-->
         </div>
       </div>
 
       <!--CHECKOUT PAGE visible when showLessons = false-->
       <div v-else>
-        <div class="checkoutInfo">
-          <input v-model="firstName" placeholder="Enter your first name">
-          <input v-model="lastName" placeholder=" Enter your last name">
-          <input v-model="phoneNumber" placeholder="Enter your phone number">
-          <!--computed-->
-          <p>{{ fullName }}</p>
-          <p> {{ phoneNumber }}</p>
+        <div class="checkoutWrap">
+          <p> Items in cart:{{cartItemAmount}}</p>
+          <div class="checkoutInfo">
+            <input v-model="firstName" placeholder="Enter your first name">
+            <input v-model="lastName" placeholder=" Enter your last name">
+            <input v-model="phoneNumber" placeholder="Enter your phone number">
+            <!--computed-->
+            <p>{{ fullName }}</p>
+            <p> {{ phoneNumber }}</p>
 
-          <!--DISBALED BUTTONS-->
-          <button v-on:click="checkoutInfo"
-            :disabled="!/^[A-Za-z\s]+$/.test(firstName)|| !/^[A-Za-z\s]+$/.test(lastName)|| !/^[0-9]+$/.test(phoneNumber)">
-            Check out
-          </button>
+            <!--DISBALED BUTTONS-->
+            <button v-on:click="checkoutInfo"
+              :disabled="!/^[A-Za-z\s]+$/.test(firstName)|| !/^[A-Za-z\s]+$/.test(lastName)|| !/^[0-9]+$/.test(phoneNumber)">
+              Check out
+            </button>
+          </div>
         </div>
       </div>
-
     </main>
-
   </div>
   <script src="app.js"></script>
 </body>
