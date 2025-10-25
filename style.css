@@ -23,6 +23,13 @@
   padding: 15px;
 }
 
+.nav {
+  border: 3px solid rgb(243, 180, 222);
+  background-color: aliceblue;
+  padding: 1px;
+  border-radius: 3px;
+}
+
 .addBtn {
   background-color: rgb(202, 199, 199);
   border: 3px solid rgb(255, 252, 254);
@@ -57,7 +64,7 @@
 }
 
 body {
-  background-color: rgb(27, 34, 91);
+  background-color: rgb(183, 183, 183);
   margin: 0;
   padding: 0;
 }

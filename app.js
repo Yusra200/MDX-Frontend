@@ -6,19 +6,23 @@ const app = createApp({
       site: 'School Lessons',
       //presenting all the lessons
       lessons: [
-        { id: 10, title: 'Maths', availability: 5, location: 'London', price: 10 },
-        { id: 11, title: 'English', availability: 5, location: 'London', price: 11 },
-        { id: 12, title: 'Science', availability: 5, location: 'London', price: 12 },
-        { id: 13, title: 'History', availability: 5, location: 'London', price: 13 },
-        { id: 14, title: 'Computing', availability: 5, location: 'London', price: 14 },
+        { id: 10, title: 'Maths', availability: 6, location: 'London', price: 100 },
+        { id: 11, title: 'English', availability: 23, location: 'London', price: 101 },
+        { id: 12, title: 'Science', availability: 2, location: 'London', price: 12 },
+        { id: 13, title: 'History', availability: 3, location: 'London', price: 13 },
+        { id: 14, title: 'Computing', availability: 7, location: 'London', price: 14 },
         { id: 15, title: 'Business', availability: 5, location: 'London', price: 15 },
-        { id: 16, title: 'Art', availability: 5, location: 'London', price: 16 },
+        { id: 16, title: 'Art', availability: 31, location: 'London', price: 16 },
         { id: 17, title: 'Geography', availability: 5, location: 'London', price: 17 },
         { id: 18, title: 'Music', availability: 5, location: 'London', price: 18 },
         { id: 19, title: 'Drama', availability: 5, location: 'London', price: 19 }
       ],
       //array stores any lessons that is added to cart
       cart: [],
+      //for my sorting
+      sortBy: '',
+      sortOrder: '',
+      showDrop: false,
       //show lessons, if not then take to checkout page
       showLessons: true,
       //user information for checkout
@@ -37,9 +41,18 @@ const app = createApp({
       return [this.firstName, this.lastName
       ].join(' ');
     },
-    sortBy() {
-
+    sortedLessons() {
+      //sorting by price
+      if (this.sortBy === "price") {
+        return [...this.lessons].sort((a, b) => a.price - b.price);
+      }
+      //sorting by availiablity
+      if (this.sortBy === "availability") {
+        return [...this.lessons].sort((a, b) => a.availability - b.availability);
+      }
+      return this.lessons;
     }
+
   },
   methods: {
     addToCart(lesson) {

@@ -18,11 +18,12 @@
       <h1>{{site}}</h1>
     </div>
 
+    <div class="nav">
+      <ul>
+        <a href="#home">Home</a>
+      </ul>
+    </div>
 
-
-
-
-    
     <!--if button has 0 items and if its on lesson page it will be disabled-->
     <!--similiar to event listener which runs whatever function-->
     <div class="checkoutBtn">
@@ -33,16 +34,30 @@
       </button>
     </div>
 
+    <div class="dropdown">
+      <button v-on:click="showDrop = !showDrop" class="dropBtn">
+        Sort By
+      </button>
+
+      <div v-if="showDrop" class="dropContent">
+        <a href="#" v-on:click="sortBy ='price' ; showDrop=false;">Price</a>
+        <a href="#" v-on:click="sortBy ='availability' ; showDrop=false;">Availability</a>
+        <!-- <a href="#" v-on:click="sortBy ='title' ; showDrop=false;">Title</a>
+        <a href="#" v-on:click="sortBy ='location' ; showDrop=false;">Location</a>
+        -->
+      </div>
+    </div>
+
     <main>
       <!--Lessons page visible if showlessons is true-->
       <div v-if="showLessons" class="lessonWrap">
-        <div v-for="lesson in lessons" :key="lesson.id" class="lessonBox">
+        <div v-for="lesson in sortedLessons" :key="lesson.id" class="lessonBox">
           <div class="headtwo">
             <h2>{{lesson.title}}</h2>
           </div>
           <p>Availability:{{lesson.availability}}</p>
           <p>Location:{{lesson.location}}</p>
-          <p>Price: {{lesson.price}}</p> <!--better syntax practice than 'vtext'-->
+          <p>Price: £{{lesson.price}}</p> <!--better syntax practice than 'vtext'-->
           <!--ADD TO CART BUTTONS linked to addToCart-->
           <button class="addBtn" v-on:click="addToCart(lesson)" :disabled="lesson.availability===0">
             Add to cart
