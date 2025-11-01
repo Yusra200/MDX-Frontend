@@ -1,7 +1,7 @@
 .header {
   padding: 10px;
   text-align: center;
-  background: #14124d;
+  background-color: #160c3f;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -18,25 +18,58 @@
 
 .lessonBox {
   background-color: rgba(255, 255, 255, 0.797);
-  border: 5px solid rgb(237, 237, 237);
-  border-radius: 3px;
+  border-radius: 15px;
   padding: 15px;
 }
 
 .nav {
-  border: 3px solid rgb(243, 180, 222);
-  background-color: aliceblue;
-  padding: 1px;
-  border-radius: 3px;
+  background: #1b0e4c;
+  padding: 15px 20px;
+  margin: 0 auto 20px;
+  border-radius: 0px;
+  display: flex;
+}
+
+.dropBtn {
+  background: #594898;
+  color: white;
+  border: none;
+  padding: 13px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 650;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.dropBtn:hover {
+  background-color: #7359b0;
+}
+
+.searchBar {
+  background-color: rgba(255, 255, 255, 0.797);
+  border-radius: 15px;
+  padding: 15px;
+  width: 500px;
+  border: none;
+  margin: auto
 }
 
 .addBtn {
-  background-color: rgb(202, 199, 199);
-  border: 3px solid rgb(255, 252, 254);
-  border-radius: 5px;
-  padding: 5px;
+  background: #928df1;
   color: white;
-  font-size: 16px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.addBtn:hover {
+  background-color: #250e5a;
 }
 
 .checkoutBtn {
@@ -44,9 +77,13 @@
 }
 
 .checkoutBtn button {
-  padding: 10px;
-  border: 10px;
-  border-radius: 5px;
+  background: #1b0e4c;
+  color: white;
+  border: none;
+  padding: 15px 10px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 650;
 }
 
 .headtwo {
@@ -55,7 +92,7 @@
 }
 
 .checkoutWrap {
-  background-color: rgb(202, 199, 199);
+  background-color: rgb(75, 17, 17);
   border: 10px solid rgb(202, 199, 199);
   border-radius: 5px;
   margin: 0 auto;
@@ -64,7 +101,7 @@
 }
 
 body {
-  background-color: rgb(183, 183, 183);
+  background: linear-gradient(135deg, #12194c 0%, #764ba2 100%);
   margin: 0;
   padding: 0;
 }

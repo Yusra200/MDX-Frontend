@@ -19,39 +19,38 @@
     </div>
 
     <div class="nav">
-      <ul>
-        <a href="#home">Home</a>
-      </ul>
-    </div>
+      <div class="dropdown">
+        <button v-on:click="showDrop = !showDrop" class="dropBtn">
+          Sort By
+        </button>
 
-    <!--if button has 0 items and if its on lesson page it will be disabled-->
-    <!--similiar to event listener which runs whatever function-->
-    <div class="checkoutBtn">
-      <button v-on:click="goToCheckout" :disabled="cart.length === 0 && showLessons">
-        <i class="fa-solid fa-cart-shopping"></i>
-        <span v-if="showLessons">Check out ({{ cart.length }})</span>
-        <span v-else>Back to lessons</span>
-      </button>
-    </div>
-
-    <div class="dropdown">
-      <button v-on:click="showDrop = !showDrop" class="dropBtn">
-        Sort By
-      </button>
-
-      <div v-if="showDrop" class="dropContent">
-        <a href="#" v-on:click="sortBy ='price' ; showDrop=false;">Price</a>
-        <a href="#" v-on:click="sortBy ='availability' ; showDrop=false;">Availability</a>
-        <!-- <a href="#" v-on:click="sortBy ='title' ; showDrop=false;">Title</a>
-        <a href="#" v-on:click="sortBy ='location' ; showDrop=false;">Location</a>
-        -->
+        <div v-if="showDrop" class="dropContent">
+          <a href="#" v-on:click="sortBy ='price' ; showDrop=false;">Lowest Price</a>
+          <a href="#" v-on:click="sortBy ='availability' ; showDrop=false;">Least Availability</a>
+          <a href="#" v-on:click="sortBy ='title' ; showDrop=false;">Title</a>
+          <a href="#" v-on:click="sortBy ='location' ; showDrop=false;">Location</a>
+        
+        </div>
       </div>
+      <input class="searchBar" type="text" placeholder="Search..">
+      <div class="checkoutBtn">
+        <button v-on:click="goToCheckout" :disabled="cart.length === 0 && showLessons">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span v-if="showLessons">Check out ({{ cart.length }})</span>
+          <span v-else>Back to lessons</span>
+        </button>
+      </div>
+      <!--if button has 0 items and if its on lesson page it will be disabled-->
+      <!--similiar to event listener which runs whatever function-->
     </div>
+
+   
 
     <main>
       <!--Lessons page visible if showlessons is true-->
       <div v-if="showLessons" class="lessonWrap">
         <div v-for="lesson in sortedLessons" :key="lesson.id" class="lessonBox">
+          <i :class="lesson.icon" class="lesson-icon"></i>
           <div class="headtwo">
             <h2>{{lesson.title}}</h2>
           </div>
@@ -79,8 +78,7 @@
             <p> {{ phoneNumber }}</p>
 
             <!--DISBALED BUTTONS-->
-            <button v-on:click="checkoutInfo"
-              :disabled="!/^[A-Za-z\s]+$/.test(firstName)|| !/^[A-Za-z\s]+$/.test(lastName)|| !/^[0-9]+$/.test(phoneNumber)">
+            <button v-on:click="checkoutInfo" :disabled="isCheckDisabled()">
               Check out
             </button>
           </div>
