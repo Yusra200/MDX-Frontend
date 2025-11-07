@@ -6,23 +6,23 @@ const app = createApp({
       site: 'School Lessons',
       //presenting all the lessons
       lessons: [
-        { id: 10, title: 'Maths', availability: 6, location: 'London', price: 100, icon: "fa-solid fa-calculator"},
-        { id: 11, title: 'English', availability: 23, location: 'London', price: 10, icon: "fa-solid fa-book-open"},
-        { id: 12, title: 'Science', availability: 2, location: 'London', price: 12,  icon: "fa-solid fa-microscope"},
+        { id: 10, title: 'Maths', availability: 6, location: 'London', price: 100, icon: "fa-solid fa-calculator" },
+        { id: 11, title: 'English', availability: 23, location: 'London', price: 10, icon: "fa-solid fa-book-open" },
+        { id: 12, title: 'Science', availability: 2, location: 'London', price: 12, icon: "fa-solid fa-microscope" },
         { id: 13, title: 'History', availability: 3, location: 'London', price: 13, icon: "fa-solid fa-landmark" },
-        { id: 14, title: 'Computing', availability: 7, location: 'London', price: 14, icon: "fa-solid fa-display"},
-        { id: 15, title: 'Business', availability: 5, location: 'London', price: 15, icon: "fa-solid fa-user-tie"},
-        { id: 16, title: 'Art', availability: 31, location: 'London', price: 16, icon: "fa-solid fa-palette"},
-        { id: 17, title: 'Geography', availability: 5, location: 'London', price: 17, icon: "fa-solid fa-earth-americas"},
-        { id: 18, title: 'Music', availability: 5, location: 'London', price: 18, icon:"fa-solid fa-music"},
-        { id: 19, title: 'Drama', availability: 5, location: 'London', price: 19, icon:"fa-solid fa-masks-theater"}
+        { id: 14, title: 'Computing', availability: 7, location: 'London', price: 14, icon: "fa-solid fa-display" },
+        { id: 15, title: 'Business', availability: 5, location: 'London', price: 15, icon: "fa-solid fa-user-tie" },
+        { id: 16, title: 'Art', availability: 31, location: 'London', price: 16, icon: "fa-solid fa-palette" },
+        { id: 17, title: 'Geography', availability: 5, location: 'London', price: 17, icon: "fa-solid fa-earth-americas" },
+        { id: 18, title: 'Music', availability: 5, location: 'London', price: 18, icon: "fa-solid fa-music" },
+        { id: 19, title: 'Drama', availability: 5, location: 'London', price: 19, icon: "fa-solid fa-masks-theater" }
       ],
       //array stores any lessons that is added to cart
       cart: [],
       //for my sorting
       sortBy: '',
       sortOrder: '',
-      showDrop: false,
+      //showDrop: false,
       //show lessons, if not then take to checkout page
       showLessons: true,
       //user information for checkout
@@ -43,16 +43,21 @@ const app = createApp({
     },
     sortedLessons() {
       //sorting by price
-      if (this.sortBy === "price") {
+      if (this.sortBy === "priceAsc") {
         return [...this.lessons].sort((a, b) => a.price - b.price);
       }
+      if (this.sortBy === "priceDes") {
+        return [...this.lessons].sort((a, b) => b.price - a.price);
+      }
       //sorting by availiablity
-      if (this.sortBy === "availability") {
+      if (this.sortBy === "availabilityDes") {
         return [...this.lessons].sort((a, b) => a.availability - b.availability);
+      }
+      if (this.sortBy === "availabilityAsc") {
+        return [...this.lessons].sort((a, b) => b.availability - a.availability);
       }
       return this.lessons;
 
-      lessons.sort((a, b) => a.locale)
     },
   },
   methods: {
@@ -63,23 +68,37 @@ const app = createApp({
       lesson.availability--;
       this.cart.push(lesson.id); //push lesson id to the cart
     },
+    removeFromCart(lesson) {
+      //find where the lesson id is
+      const index = this.cart.indexOf(lesson.id)
+      //if cant find then return ()
+      if (index === -1) return
+      //find exact index and remove 1
+      this.cart.splice(index, 1)
+      //back to availability stock
+      lesson.availability++
+    },
+
     goToCheckout() {
       //between pages
       this.showLessons = this.showLessons ? false : true;
     },
-    isCheckDisabled() {
+    isFormValid() {
+      //only allows certain regex
       var firstRegex = /^[A-Za-z\s]+$/;
       var lastRegex = /^[A-Za-z\s]+$/;
+      //only allows numbers
       var phoneRegex = /^[0-9+\-\s()]+$/;
-
+      //check if fields match all of their inputs
+      //uses AND so all conditions must be true before it can work
       if (
         firstRegex.test(this.firstName) &&
         lastRegex.test(this.lastName) &&
         phoneRegex.test(this.phoneNumber)
       ) {
-        return false;
+        return true; //all valid so button is enabled
       } else {
-        return true;
+        return false; //not valid so button is disbaled
       }
     },
     checkoutInfo() {
@@ -90,3 +109,4 @@ const app = createApp({
 });
 //vue connect js to html
 app.mount('#app');
+

@@ -1,7 +1,7 @@
 .header {
   padding: 10px;
   text-align: center;
-  background-color: #160c3f;
+  background-color: #090632;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -22,8 +22,12 @@
   padding: 15px;
 }
 
+.lesson.icon{
+  font-size: 100x;;
+}
+
 .nav {
-  background: #1b0e4c;
+  background: #0e0a4c;
   padding: 15px 20px;
   margin: 0 auto 20px;
   border-radius: 0px;
@@ -40,9 +44,21 @@
   font-weight: 650;
   transition: background-color 0.3s, transform 0.3s;
 }
+.dropContent {
+  /*dropdown menu */
+  display: none;
+  background-color: aliceblue;
+  border: 1px solid;
+}
 
-.dropBtn:hover {
-  background-color: #7359b0;
+.dropdown:hover .dropContent {
+  /* shows when hovered over it */
+  display: block;
+}
+
+.dropContent a {
+  display: block;
+  padding: 5px 10px;
 }
 
 .searchBar {
@@ -60,10 +76,10 @@
   border: none;
   padding: 10px 20px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 650;
   cursor: pointer;
-  width: 100%;
+  width: 50%;
   margin-top: 10px;
   transition: background-color 0.3s, transform 0.3s;
 }
@@ -72,12 +88,31 @@
   background-color: #250e5a;
 }
 
+.minusBtn {
+  background: #928df1;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 650;
+  cursor: pointer;
+  width: 50%;
+  margin-top: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.minusBtn:hover {
+  background-color: #250e5a;
+}
+
+
 .checkoutBtn {
   text-align: right;
 }
 
 .checkoutBtn button {
-  background: #1b0e4c;
+  background: #0e0a4c;
   color: white;
   border: none;
   padding: 15px 10px;
@@ -92,16 +127,30 @@
 }
 
 .checkoutWrap {
-  background-color: rgb(75, 17, 17);
-  border: 10px solid rgb(202, 199, 199);
-  border-radius: 5px;
+  max-width: 500px;
   margin: 0 auto;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.797);
+  border-radius: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.cartDisplay {
   padding: 10px;
-  width: 700px;
+  margin: 0px;
+}
+
+.checkoutInfo {
+  background: rgba(239, 237, 237, 0.797);
+  padding: 2%;
+  border-radius: 10px;
+  display: flex; /*new rows */
+  flex-direction: column;
+  gap: 15px;
 }
 
 body {
-  background: linear-gradient(135deg, #12194c 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #151f6b 0%, #764ba2 100%);
   margin: 0;
   padding: 0;
 }

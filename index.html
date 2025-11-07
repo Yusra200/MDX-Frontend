@@ -20,16 +20,15 @@
 
     <div class="nav">
       <div class="dropdown">
-        <button v-on:click="showDrop = !showDrop" class="dropBtn">
-          Sort By
-        </button>
+        <button class="dropBtn">Sort By</button>
+        <div class="dropContent">
+          <a href="#" @click="sortBy = 'priceAsc'">Lowest Price </a>
+          <a href="#" @click="sortBy ='priceDes'">Highest Price</a>
+          <a href="#" @click="sortBy = 'availabilityAsc'">Most Availability</a>
+          <a href="#" @click="sortBy = 'availabilityDes'">Least Avaliability</a>
+          <a href="#" @click="sortBy = 'subjectA'">Subjects (A-Z)</a>
+          <a href="#" @click="sortBy = 'subjectZ'">Subjects (Z-A)</a>
 
-        <div v-if="showDrop" class="dropContent">
-          <a href="#" v-on:click="sortBy ='price' ; showDrop=false;">Lowest Price</a>
-          <a href="#" v-on:click="sortBy ='availability' ; showDrop=false;">Least Availability</a>
-          <a href="#" v-on:click="sortBy ='title' ; showDrop=false;">Title</a>
-          <a href="#" v-on:click="sortBy ='location' ; showDrop=false;">Location</a>
-        
         </div>
       </div>
       <input class="searchBar" type="text" placeholder="Search..">
@@ -44,8 +43,6 @@
       <!--similiar to event listener which runs whatever function-->
     </div>
 
-   
-
     <main>
       <!--Lessons page visible if showlessons is true-->
       <div v-if="showLessons" class="lessonWrap">
@@ -59,8 +56,13 @@
           <p>Price: £{{lesson.price}}</p> <!--better syntax practice than 'vtext'-->
           <!--ADD TO CART BUTTONS linked to addToCart-->
           <button class="addBtn" v-on:click="addToCart(lesson)" :disabled="lesson.availability===0">
-            Add to cart
+            + 1
           </button>
+
+          <button class="minusBtn" v-on:click="removeFromCart(lesson)">
+            - 1
+          </button>
+
           <!--disabled function-->
         </div>
       </div>
@@ -68,7 +70,11 @@
       <!--CHECKOUT PAGE visible when showLessons = false-->
       <div v-else>
         <div class="checkoutWrap">
-          <p> Items in cart:{{cartItemAmount}}</p>
+          <div class="cartDisplay">
+            <p> Items in cart:{{cartItemAmount}}</p>
+            <p> Lessons in cart: {{}}</p>
+          </div>
+
           <div class="checkoutInfo">
             <input v-model="firstName" placeholder="Enter your first name">
             <input v-model="lastName" placeholder=" Enter your last name">
@@ -78,7 +84,7 @@
             <p> {{ phoneNumber }}</p>
 
             <!--DISBALED BUTTONS-->
-            <button v-on:click="checkoutInfo" :disabled="isCheckDisabled()">
+            <button v-on:click="checkoutInfo" :disabled="isFormValid()">
               Check out
             </button>
           </div>
