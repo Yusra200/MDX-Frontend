@@ -1,0 +1,182 @@
+.header {
+  display: flex;
+  padding: 2px;
+  align-items: center;
+  background-color: #090632;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.logo {
+height: 100px;
+width: auto;
+margin-right: 550px;
+
+}
+.lessonWrap {
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.lessonBox {
+  background-color: rgba(255, 255, 255, 0.797);
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.lesson.icon{
+  font-size: 100x;;
+}
+
+.nav {
+  background: #1b1e4d;
+  padding: 15px 20px;
+  margin: 0 auto 20px;
+  border-radius: 0px;
+  display: flex;
+}
+
+.dropBtn {
+
+  background: #1e1b51;
+  color: white;
+  border: 1px;
+  padding: 15px 10px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 650;
+  
+  /* background: #594898;
+  color: white;
+  border: none;
+  padding: 13px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 650;
+  transition: background-color 0.3s, transform 0.3s;
+
+  */
+}
+.dropContent {
+  /*dropdown menu */
+  display: none;
+  background-color: aliceblue;
+  border: 1px solid;
+}
+
+.dropdown:hover .dropContent {
+  /* shows when hovered over it */
+  display: block;
+}
+
+.dropContent a {
+  display: block;
+  padding: 5px 10px;
+}
+
+.searchBar {
+  background-color: rgba(255, 255, 255, 0.797);
+  border-radius: 15px;
+  padding: 15px;
+  width: 500px;
+  border: none;
+  margin: auto
+}
+
+.addBtn {
+  background: #2c2a49;
+  color: white;
+  border: none;
+  padding: 9px 6px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  width: 25%;
+  margin-top: 10px;
+ 
+  margin-right: 10px;
+ 
+  
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.addBtn:hover {
+  background-color: #250e5a;
+}
+
+.minusBtn {
+  background: #2c2a49;
+  color: white;
+  border: none;
+  padding: 9px 6px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  width: 25%;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+
+
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.minusBtn:hover {
+  background-color: #250e5a;
+}
+
+
+.checkoutBtn {
+  text-align: right;
+}
+
+.checkoutBtn button {
+  background: #1e1b51;
+  color: white;
+  border: 1px;
+  padding: 15px 10px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.headtwo {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+}
+
+.checkoutWrap {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.797);
+  border-radius: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.cartDisplay {
+  padding: 10px;
+  margin: 0px;
+}
+
+.checkoutInfo {
+  background: rgba(239, 237, 237, 0.797);
+  padding: 2%;
+  border-radius: 10px;
+  display: flex; /*new rows */
+  flex-direction: column;
+  gap: 15px;
+}
+
+body {
+  background: linear-gradient(135deg, #1b1e4d 0%, #63617a 100%);
+  margin: 0;
+  padding: 0;
+}
