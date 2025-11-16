@@ -66,7 +66,8 @@ const app = createApp({
       if (lesson.availability <= 0) return;
       //if there availiablity then take one
       lesson.availability--;
-      this.cart.push(lesson); //push lesson id to the cart
+
+      this.cart.push(lesson.id); //push lesson id to the cart
     },
     removeFromCart(lesson) {
       //find where the lesson id is
@@ -96,12 +97,12 @@ const app = createApp({
         lastRegex.test(this.lastName) &&
         phoneRegex.test(this.phoneNumber)
       ) {
-        return false //no so button is disbaled
+
+        return true; //all valid so button is enabled
       } else {
-        return true; //yes so button is enabled
+        return false; //not valid so button is disbaled
       }
     },
-    //get to retrieve lessons
     async getLessons() {
       try {
         //fetch request to get lessons
@@ -117,32 +118,12 @@ const app = createApp({
         console.log("Unable to fetch lessons")
       }
     },
-    //Post for new orders
-    async saveOrders() {
-      try {
-        //fetch post to save orders
-        const response = await fetch("/orders", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          //make strings into json format as post requires
-          body: JSON.stringify({})
-        });
+  checkoutInfo() {
+    //display after button is clicked in checkout 
+    alert("Checkout completed")
+  },
+}
 
-        //make response into json format
-        const result = await response.json();
-        //log result
-        console.log(result);
-        //catch errors
-      } catch (error) {
-        console.log("Unable to save order")
-      }
-    },
- 
-    checkoutInfo() {
-      //display after button is clicked in checkout 
-      alert("Checkout completed")
-    },
-  }
 });
 //vue connect js to html
 app.mount('#app');
