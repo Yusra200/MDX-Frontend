@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>School Lessons</title>
+  <title>Teachly</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
@@ -15,12 +15,16 @@
   <!--connecting html to vue-->
   <div id="app">
     <div class="header">
+      <img src="logo.png" alt="Teachly logo" class="logo">
       <h1>{{site}}</h1>
+
     </div>
 
     <div class="nav">
       <div class="dropdown">
-        <button class="dropBtn">Sort By</button>
+        <button class="dropBtn">Sort By
+          <i class="fa-solid fa-sort-down"></i>
+        </button>
         <div class="dropContent">
           <a href="#" @click="sortBy = 'priceAsc'">Lowest Price </a>
           <a href="#" @click="sortBy ='priceDes'">Highest Price</a>
@@ -51,17 +55,15 @@
           <div class="headtwo">
             <h2>{{lesson.title}}</h2>
           </div>
-          <p>Availability:{{lesson.availability}}</p>
-          <p>Location:{{lesson.location}}</p>
+          <p>Availability: {{lesson.availability}}</p>
+          <p>Location: {{lesson.location}}</p>
           <p>Price: £{{lesson.price}}</p> <!--better syntax practice than 'vtext'-->
           <!--ADD TO CART BUTTONS linked to addToCart-->
           <button class="addBtn" v-on:click="addToCart(lesson)" :disabled="lesson.availability===0">
-            + 1
-          </button>
+            + 1 </button>
 
           <button class="minusBtn" v-on:click="removeFromCart(lesson)">
-            - 1
-          </button>
+            - 1 </button>
 
           <!--disabled function-->
         </div>

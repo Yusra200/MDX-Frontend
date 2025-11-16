@@ -3,19 +3,19 @@ const { createApp } = Vue;
 const app = createApp({
   data() {
     return {
-      site: 'School Lessons',
+      site: 'Teachly',
       //presenting all the lessons
       lessons: [
-        { id: 10, title: 'Maths', availability: 6, location: 'London', price: 100, icon: "fa-solid fa-calculator" },
-        { id: 11, title: 'English', availability: 23, location: 'London', price: 10, icon: "fa-solid fa-book-open" },
-        { id: 12, title: 'Science', availability: 2, location: 'London', price: 12, icon: "fa-solid fa-microscope" },
-        { id: 13, title: 'History', availability: 3, location: 'London', price: 13, icon: "fa-solid fa-landmark" },
-        { id: 14, title: 'Computing', availability: 7, location: 'London', price: 14, icon: "fa-solid fa-display" },
-        { id: 15, title: 'Business', availability: 5, location: 'London', price: 15, icon: "fa-solid fa-user-tie" },
-        { id: 16, title: 'Art', availability: 31, location: 'London', price: 16, icon: "fa-solid fa-palette" },
-        { id: 17, title: 'Geography', availability: 5, location: 'London', price: 17, icon: "fa-solid fa-earth-americas" },
-        { id: 18, title: 'Music', availability: 5, location: 'London', price: 18, icon: "fa-solid fa-music" },
-        { id: 19, title: 'Drama', availability: 5, location: 'London', price: 19, icon: "fa-solid fa-masks-theater" }
+        { id: 10, title: "Maths", availability: 6, location: "Hendon", price: 39, icon: "fa-solid fa-calculator" },
+        { id: 11, title: "English", availability: 7, location: "Brentcross", price: 35. },
+        { id: 12, title: "Science", availability: 8, location: "Kilburn", price: 40 },
+        { id: 13, title: "History", availability: 3, location: "Whitecity", price: 25 },
+        { id: 14, title: "Computing", availability: 4, location: "Cricklewood", price: 50 },
+        { id: 15, title: "Business", availability: 5, location: "Ealing", price: 45 },
+        { id: 16, title: "Art", availability: 9, location: "Camden", price: 25 },
+        { id: 17, title: "Geography", availability: 5, location: "Hendon", price: 20 },
+        { id: 18, title: "Music", availability: 5, location: "Hammersmith", price: 20 },
+        { id: 19, title: "Drama", availability: 5, location: "Harrow", price: 20 }
       ],
       //array stores any lessons that is added to cart
       cart: [],
@@ -101,12 +101,29 @@ const app = createApp({
         return false; //not valid so button is disbaled
       }
     },
-    checkoutInfo() {
-      //display after button is clicked in checkout 
-      alert("Checkout completed")
+    async getLessons() {
+      try {
+        //fetch request to get lessons
+        const response = await fetch("/lessons");
+        //make into json format
+        const result = await response.json();
+        //log results
+        console.log(result);
+        //store
+        this.lessons = result;
+        //catching error if failure
+      } catch (error) {
+        console.log("Unable to fetch lessons")
+      }
     },
-  }
+
+  checkoutInfo() {
+    //display after button is clicked in checkout 
+    alert("Checkout completed")
+  },
+}
 });
 //vue connect js to html
 app.mount('#app');
+
 
