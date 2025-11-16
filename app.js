@@ -118,6 +118,25 @@ const app = createApp({
         console.log("Unable to fetch lessons")
       }
     },
+    async saveOrders() {
+      try {
+        //fetch post to save orders
+        const response = await fetch("/orders", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          //make strings into json format as post requires
+          body: JSON.stringify({})
+        });
+    
+        //make response into json format
+        const result = await response.json();
+        //log result
+        console.log(result);
+        //catch errors
+      } catch (error) {
+        console.log("Unable to save order")
+      }
+    },
   checkoutInfo() {
     //display after button is clicked in checkout 
     alert("Checkout completed")
