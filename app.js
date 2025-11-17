@@ -118,7 +118,7 @@ const app = createApp({
         console.log("Unable to fetch lessons")
       }
     },
-    async saveOrders() {
+    async postnewOrders() {
       try {
         //fetch post to save orders
         const response = await fetch("/orders", {
@@ -136,6 +136,21 @@ const app = createApp({
       } catch (error) {
         console.log("Unable to save order")
       }
+    },
+    async updateLessons(lessonId, newAvailability) {
+      try {
+        //fetch post to save orders
+        const response = await fetch(`/lessons/${lessonId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          //make strings into json format as post requires
+          body: JSON.stringify({ availability: newAvailability })
+        });
+        const result = await response.json();
+      } catch (error) {
+        console.log("Failure to update lesson")
+      }
+
     },
   checkoutInfo() {
     //display after button is clicked in checkout 
