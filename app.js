@@ -6,16 +6,16 @@ const app = createApp({
       site: 'Teachly',
       //presenting all the lessons
       lessons: [
-        { id: 10, title: "Maths", availability: 6, location: "Hendon", price: 39, icon: "fa-solid fa-calculator" },
-        { id: 11, title: "English", availability: 7, location: "Brentcross", price: 35. },
-        { id: 12, title: "Science", availability: 8, location: "Kilburn", price: 40 },
-        { id: 13, title: "History", availability: 3, location: "Whitecity", price: 25 },
-        { id: 14, title: "Computing", availability: 4, location: "Cricklewood", price: 50 },
-        { id: 15, title: "Business", availability: 5, location: "Ealing", price: 45 },
-        { id: 16, title: "Art", availability: 9, location: "Camden", price: 25 },
-        { id: 17, title: "Geography", availability: 5, location: "Hendon", price: 20 },
-        { id: 18, title: "Music", availability: 5, location: "Hammersmith", price: 20 },
-        { id: 19, title: "Drama", availability: 5, location: "Harrow", price: 20 }
+        { id: 10, title: "Maths", availability: 6, location: "Hendon", price: 39, image : "images/maths.jpeg"},
+        { id: 11, title: "English", availability: 7, location: "Brentcross", price: 35, image : "images/english.jpeg"},
+        { id: 12, title: "Science", availability: 8, location: "Kilburn", price: 40, image : "images/science.jpeg" },
+        { id: 13, title: "History", availability: 3, location: "Whitecity", price: 25, image : "images/history.jpeg" },
+        { id: 14, title: "Computing", availability: 4, location: "Cricklewood", price: 50, image : "images/computing.jpeg"},
+        { id: 15, title: "Business", availability: 5, location: "Ealing", price: 45, image : "images/business.jpeg" },
+        { id: 16, title: "Art", availability: 9, location: "Camden", price: 25, image : "images/art.jpeg" },
+        { id: 17, title: "Geography", availability: 5, location: "Hendon", price: 20, image : "images/geography.jpeg"},
+        { id: 18, title: "Music", availability: 5, location: "Hammersmith", price: 20 , image : "images/music.jpeg"},
+        { id: 19, title: "Drama", availability: 5, location: "Harrow", price: 20, image : "images/drama.jpeg" }
       ],
       //array stores any lessons that is added to cart
       cart: [],
@@ -67,11 +67,11 @@ const app = createApp({
       //if there availiablity then take one
       lesson.availability--;
 
-      this.cart.push(lesson.id); //push lesson id to the cart
+      this.cart.push(lesson); //push lesson id to the cart
     },
     removeFromCart(lesson) {
       //find where the lesson id is
-      const index = this.cart.indexOf(lesson.id)
+      const index = this.cart.indexOf(lesson)
       //if cant find then return ()
       if (index === -1) return
       //find exact index and remove 1
@@ -98,9 +98,9 @@ const app = createApp({
         phoneRegex.test(this.phoneNumber)
       ) {
 
-        return true; //all valid so button is enabled
+        return false; //not valid so button is not enabled
       } else {
-        return false; //not valid so button is disbaled
+        return true; //is valid so button is enabled
       }
     },
     async getLessons() {
@@ -150,7 +150,6 @@ const app = createApp({
       } catch (error) {
         console.log("Failure to update lesson")
       }
-
     },
   checkoutInfo() {
     //display after button is clicked in checkout 

@@ -35,8 +35,10 @@
 
         </div>
       </div>
+      <!--Search bar-->
       <input class="searchBar" type="text" placeholder="Search..">
       <div class="checkoutBtn">
+
         <button v-on:click="goToCheckout" :disabled="cart.length === 0 && showLessons">
           <i class="fa-solid fa-cart-shopping"></i>
           <span v-if="showLessons">Check out ({{ cart.length }})</span>
@@ -48,24 +50,27 @@
     </div>
 
     <main>
-      <!--Lessons page visible if showlessons is true-->
+      <!--lessons page visible if showlessons is true-->
       <div v-if="showLessons" class="lessonWrap">
         <div v-for="lesson in sortedLessons" :key="lesson.id" class="lessonBox">
-          <i :class="lesson.icon" class="lesson-icon"></i>
+
           <div class="headtwo">
             <h2>{{lesson.title}}</h2>
           </div>
+
+          <img :src="lesson.image" :alt="lesson.title" width="350" height="300">
           <p>Availability: {{lesson.availability}}</p>
           <p>Location: {{lesson.location}}</p>
           <p>Price: £{{lesson.price}}</p> <!--better syntax practice than 'vtext'-->
+
           <!--ADD TO CART BUTTONS linked to addToCart-->
-          <button class="addBtn" v-on:click="addToCart(lesson)" :disabled="lesson.availability===0">
+          <!--disabled when it is 0-->
+          <button class="addBtn" @click="addToCart(lesson)" :disabled="lesson.availability===0">
             + 1 </button>
 
-          <button class="minusBtn" v-on:click="removeFromCart(lesson)">
+          <button class="minusBtn" @click="removeFromCart(lesson)">
             - 1 </button>
 
-          <!--disabled function-->
         </div>
       </div>
 
@@ -73,20 +78,27 @@
       <div v-else>
         <div class="checkoutWrap">
           <div class="cartDisplay">
+
             <p> Items in cart:{{cartItemAmount}}</p>
-            <p> Lessons in cart: {{}}</p>
+            <p>Lessons in cart:</p>
+
+            <!-- displays lessons, id to keep track-->
+            <div v-for="(lesson, index) in cart" :key="lesson.id">
+              {{ lesson.title}} £{{ lesson.price }} </div>
           </div>
 
+          <!--user enter detials-->
           <div class="checkoutInfo">
             <input v-model="firstName" placeholder="Enter your first name">
             <input v-model="lastName" placeholder=" Enter your last name">
             <input v-model="phoneNumber" placeholder="Enter your phone number">
+
             <!--computed-->
             <p>{{ fullName }}</p>
             <p> {{ phoneNumber }}</p>
 
-            <!--DISBALED BUTTONS-->
-            <button v-on:click="checkoutInfo" :disabled="isFormValid()">
+            <!--DISBALED BUTTONS if form is valid then user can checkout-->
+            <button @click="checkoutInfo" :disabled="isFormValid()">
               Check out
             </button>
           </div>
