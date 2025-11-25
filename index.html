@@ -14,10 +14,10 @@
 <body>
   <!--connecting html to vue-->
   <div id="app">
+
     <div class="header">
       <img src="logo.png" alt="Teachly logo" class="logo">
       <h1>{{site}}</h1>
-
     </div>
 
     <div class="nav">
@@ -26,12 +26,15 @@
           <i class="fa-solid fa-sort-down"></i>
         </button>
         <div class="dropContent">
+
           <a href="#" @click="sortBy = 'priceAsc'">Lowest Price </a>
           <a href="#" @click="sortBy ='priceDes'">Highest Price</a>
-          <a href="#" @click="sortBy = 'availabilityAsc'">Most Availability</a>
-          <a href="#" @click="sortBy = 'availabilityDes'">Least Avaliability</a>
-          <a href="#" @click="sortBy = 'subjectA'">Subjects (A-Z)</a>
-          <a href="#" @click="sortBy = 'subjectZ'">Subjects (Z-A)</a>
+          <a href="#" @click="sortBy = 'availabilityAsc'">Least Availability</a>
+          <a href="#" @click="sortBy = 'availabilityDes'">Most Avaliability</a>
+          <a href="#" @click="sortBy = 'titleAsc'">Subjects (A-Z)</a>
+          <a href="#" @click="sortBy = 'titleDesc'">Subjects (Z-A)</a>
+          <a href="#" @click="sortBy = 'locationAsc'">Location(A-Z)</a>
+          <a href="#" @click="sortBy = 'locationDes'">Location (Z-A)</a>
 
         </div>
       </div>
@@ -58,7 +61,7 @@
             <h2>{{lesson.title}}</h2>
           </div>
 
-          <img :src="lesson.image" :alt="lesson.title" width="350" height="300">
+          <img :src="`http://localhost:3000${lesson.image}`" :alt="lesson.title" width="350" height="300">
           <p>Availability: {{lesson.availability}}</p>
           <p>Location: {{lesson.location}}</p>
           <p>Price: £{{lesson.price}}</p> <!--better syntax practice than 'vtext'-->
@@ -87,7 +90,7 @@
               {{ lesson.title}} £{{ lesson.price }} </div>
           </div>
 
-          <!--user enter detials-->
+          <!--user enter details-->
           <div class="checkoutInfo">
             <input v-model="firstName" placeholder="Enter your first name">
             <input v-model="lastName" placeholder=" Enter your last name">

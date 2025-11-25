@@ -5,25 +5,15 @@ const app = createApp({
     return {
       site: 'Teachly',
       //presenting all the lessons
-      lessons: [
-        { id: 10, title: "Maths", availability: 6, location: "Hendon", price: 39, image : "images/maths.jpeg"},
-        { id: 11, title: "English", availability: 7, location: "Brentcross", price: 35, image : "images/english.jpeg"},
-        { id: 12, title: "Science", availability: 8, location: "Kilburn", price: 40, image : "images/science.jpeg" },
-        { id: 13, title: "History", availability: 3, location: "Whitecity", price: 25, image : "images/history.jpeg" },
-        { id: 14, title: "Computing", availability: 4, location: "Cricklewood", price: 50, image : "images/computing.jpeg"},
-        { id: 15, title: "Business", availability: 5, location: "Ealing", price: 45, image : "images/business.jpeg" },
-        { id: 16, title: "Art", availability: 9, location: "Camden", price: 25, image : "images/art.jpeg" },
-        { id: 17, title: "Geography", availability: 5, location: "Hendon", price: 20, image : "images/geography.jpeg"},
-        { id: 18, title: "Music", availability: 5, location: "Hammersmith", price: 20 , image : "images/music.jpeg"},
-        { id: 19, title: "Drama", availability: 5, location: "Harrow", price: 20, image : "images/drama.jpeg" }
-      ],
+      //showcase images based on request using my static
+      lessons: [],
+      searchText: "",
+
       //array stores any lessons that is added to cart
       cart: [],
       //for my sorting
       sortBy: '',
       sortOrder: '',
-      //showDrop: false,
-      //show lessons, if not then take to checkout page
       showLessons: true,
       //user information for checkout
       firstName: '',
@@ -31,6 +21,9 @@ const app = createApp({
       phoneNumber: ''
     };
   },
+   mounted() {
+    this.getLessons();
+  }, 
   computed: {
     cartItemAmount() {
       //return items in cart or display nothing
@@ -42,6 +35,7 @@ const app = createApp({
       ].join(' ');
     },
     sortedLessons() {
+      //computing good pratice for sorting
       //sorting by price
       if (this.sortBy === "priceAsc") {
         return [...this.lessons].sort((a, b) => a.price - b.price);
@@ -50,14 +44,27 @@ const app = createApp({
         return [...this.lessons].sort((a, b) => b.price - a.price);
       }
       //sorting by availiablity
-      if (this.sortBy === "availabilityDes") {
+      if (this.sortBy === "availabilityAsc") {
         return [...this.lessons].sort((a, b) => a.availability - b.availability);
       }
-      if (this.sortBy === "availabilityAsc") {
+      if (this.sortBy === "availabilityDes") {
         return [...this.lessons].sort((a, b) => b.availability - a.availability);
       }
+      //sort by subject/title
+      if (this.sortBy === "titleAsc") {
+        return [...this.lessons].sort((a, b) => a.title.localeCompare(b.title));
+      }
+      if (this.sortBy === "titleDes") {
+        return [...this.lessons].sort((a, b) => b.title.localeCompare(a.title));
+      }
+      //sort by location
+      if (this.sortBy === "locationAsc") {
+        return [...this.lessons].sort((a, b) => a.location.localeCompare(b.location));
+      }
+      if (this.sortBy === "locationDes") {
+        return [...this.lessons].sort((a, b) => b.location.localeCompare(a.location));
+      }
       return this.lessons;
-
     },
   },
   methods: {
@@ -67,7 +74,7 @@ const app = createApp({
       //if there availiablity then take one
       lesson.availability--;
 
-      this.cart.push(lesson); //push lesson id to the cart
+      this.cart.push(lesson); //push lessons to the cart
     },
     removeFromCart(lesson) {
       //find where the lesson id is
@@ -97,7 +104,6 @@ const app = createApp({
         lastRegex.test(this.lastName) &&
         phoneRegex.test(this.phoneNumber)
       ) {
-
         return false; //not valid so button is not enabled
       } else {
         return true; //is valid so button is enabled
@@ -106,7 +112,7 @@ const app = createApp({
     async getLessons() {
       try {
         //fetch request to get lessons
-        const response = await fetch("/lessons");
+        const response = await fetch("http://localhost:3000/lessons");
         //make into json format
         const result = await response.json();
         //log results
@@ -118,16 +124,15 @@ const app = createApp({
         console.log("Unable to fetch lessons")
       }
     },
-    async postnewOrders() {
+    async postNewOrders() {
       try {
         //fetch post to save orders
-        const response = await fetch("/orders", {
+        const response = await fetch("http://localhost:3000/orders", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           //make strings into json format as post requires
           body: JSON.stringify({})
         });
-    
         //make response into json format
         const result = await response.json();
         //log result
@@ -140,7 +145,7 @@ const app = createApp({
     async updateLessons(lessonId, newAvailability) {
       try {
         //fetch post to save orders
-        const response = await fetch(`/lessons/${lessonId}`, {
+        const response = await fetch(`http://localhost:3000/lessons/:id`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           //make strings into json format as post requires
@@ -151,14 +156,26 @@ const app = createApp({
         console.log("Failure to update lesson")
       }
     },
-  checkoutInfo() {
-    //display after button is clicked in checkout 
-    alert("Checkout completed")
-  },
-}
+    checkoutInfo() {
+      //display after button is clicked in checkout 
+      alert("Checkout completed")
+    },
+    async fetchData (title, location) {
+      const searchQuery = this.searchText.trim();
+      const url = `http://localhost:3000/search?q=${encodeURIComponent(searchQuery)}`;
+
+      const response = await fetch(url);
+
+      const result= await response.json();
+
+      console.log(result);
+
+      this.lessons = result;
+    },
+
+  }
 
 });
 //vue connect js to html
 app.mount('#app');
-
 
