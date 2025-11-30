@@ -14,12 +14,12 @@
 <body>
   <!--connecting html to vue-->
   <div id="app">
-
     <div class="header">
       <img src="logo.png" alt="Teachly logo" class="logo">
       <h1>{{site}}</h1>
     </div>
 
+    <!--nav bar with drop down for sorting-->
     <div class="nav">
       <div class="dropdown">
         <button class="dropBtn">Sort By
@@ -39,9 +39,10 @@
         </div>
       </div>
       <!--Search bar-->
-      <input class="searchBar" type="text" placeholder="Search..">
+      <input class="searchBar" type="text" placeholder="Search.." v-model="searchText" @input="fetchData">
+      
       <div class="checkoutBtn">
-
+        <!--not enabled till something is in cart-->
         <button v-on:click="goToCheckout" :disabled="cart.length === 0 && showLessons">
           <i class="fa-solid fa-cart-shopping"></i>
           <span v-if="showLessons">Check out ({{ cart.length }})</span>
@@ -60,8 +61,8 @@
           <div class="headtwo">
             <h2>{{lesson.title}}</h2>
           </div>
-
-          <img :src="`http://localhost:3000${lesson.image}`" :alt="lesson.title" width="350" height="300">
+          <!--connecting my images-->
+          <img :src="`https://express-backend-0l2f.onrender.com${lesson.image}`" :alt="lesson.title" width="350" height="300">
           <p>Availability: {{lesson.availability}}</p>
           <p>Location: {{lesson.location}}</p>
           <p>Price: £{{lesson.price}}</p> <!--better syntax practice than 'vtext'-->

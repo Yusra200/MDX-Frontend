@@ -8,7 +8,6 @@ const app = createApp({
       //showcase images based on request using my static
       lessons: [],
       searchText: "",
-
       //array stores any lessons that is added to cart
       cart: [],
       //for my sorting
@@ -112,7 +111,7 @@ const app = createApp({
     async getLessons() {
       try {
         //fetch request to get lessons
-        const response = await fetch("http://localhost:3000/lessons");
+        const response = await fetch("https://express-backend-0l2f.onrender.com/lessons");
         //make into json format
         const result = await response.json();
         //log results
@@ -127,7 +126,7 @@ const app = createApp({
     async postNewOrders() {
       try {
         //fetch post to save orders
-        const response = await fetch("http://localhost:3000/orders", {
+        const response = await fetch("https://express-backend-0l2f.onrender.com/orders", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           //make strings into json format as post requires
@@ -145,7 +144,7 @@ const app = createApp({
     async updateLessons(lessonId, newAvailability) {
       try {
         //fetch post to save orders
-        const response = await fetch(`http://localhost:3000/lessons/:id`, {
+        const response = await fetch(`https://express-backend-0l2f.onrender.com/lessons/${lessonId}`, {    
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           //make strings into json format as post requires
@@ -162,10 +161,14 @@ const app = createApp({
     },
     async fetchData (title, location) {
       const searchQuery = this.searchText.trim();
-      const url = `http://localhost:3000/search?q=${encodeURIComponent(searchQuery)}`;
+      //if search is false return to all lessons
+      if(!searchQuery) {
+        this.getLessons();
+        return;
+      }
+      const url = `http://localhost:3000/lessons/search?q=${encodeURIComponent(searchQuery)}`;
 
       const response = await fetch(url);
-
       const result= await response.json();
 
       console.log(result);
