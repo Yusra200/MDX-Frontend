@@ -54,7 +54,7 @@ const app = createApp({
       if (this.sortBy === "titleAsc") {
         return [...this.lessons].sort((a, b) => a.title.localeCompare(b.title));
       }
-      if (this.sortBy === "titleDes") {
+      if (this.sortBy === "titleDesc") {
         return [...this.lessons].sort((a, b) => b.title.localeCompare(a.title));
       }
       //sort by location
