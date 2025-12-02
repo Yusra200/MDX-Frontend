@@ -20,9 +20,10 @@ const app = createApp({
       phoneNumber: ''
     };
   },
-   mounted() {
+  
+  mounted() {
     this.getLessons();
-  }, 
+  },
   computed: {
     cartItemAmount() {
       //return items in cart or display nothing
@@ -68,7 +69,7 @@ const app = createApp({
   },
   methods: {
     addToCart(lesson) {
-      //if there are no avaliblity left return
+      //if there less or equal to - return
       if (lesson.availability <= 0) return;
       //if there availiablity then take one
       lesson.availability--;
@@ -82,12 +83,12 @@ const app = createApp({
       if (index === -1) return
       //find exact index and remove 1
       this.cart.splice(index, 1)
-      //back to availability stock
+      //back to availability stock add 1
       lesson.availability++
     },
 
     goToCheckout() {
-      //between pages
+      //between pages if showlesson true it is now false
       this.showLessons = this.showLessons ? false : true;
     },
     isFormValid() {
@@ -130,7 +131,12 @@ const app = createApp({
           method: "POST",
           headers: { "Content-Type": "application/json" },
           //make strings into json format as post requires
-          body: JSON.stringify({})
+          body: JSON.stringify({
+            name: this.name,
+            phone: this.phone,
+            lessonId: this.lessonId,
+            quantity: this.quantity
+          })
         });
         //make response into json format
         const result = await response.json();
@@ -144,7 +150,7 @@ const app = createApp({
     async updateLessons(lessonId, newAvailability) {
       try {
         //fetch post to save orders
-        const response = await fetch(`https://express-backend-0l2f.onrender.com/lessons/${lessonId}`, {    
+        const response = await fetch(`https://express-backend-0l2f.onrender.com/lessons/${lessonId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           //make strings into json format as post requires
@@ -159,25 +165,22 @@ const app = createApp({
       //display after button is clicked in checkout 
       alert("Checkout completed")
     },
-    async fetchData (title, location) {
+    async fetchData(title, location) {
       const searchQuery = this.searchText.trim();
       //if search is false return to all lessons
       if(!searchQuery) {
         this.getLessons();
         return;
       }
-      const url = `http://localhost:3000/lessons/search?q=${encodeURIComponent(searchQuery)}`;
+      const url = `https://express-backend-0l2f.onrender.com/lessons/search?q=${encodeURIComponent(searchQuery)}`;
 
       const response = await fetch(url);
-      const result= await response.json();
 
+      const result = await response.json();
       console.log(result);
-
       this.lessons = result;
     },
-
   }
-
 });
 //vue connect js to html
 app.mount('#app');

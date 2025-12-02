@@ -40,7 +40,7 @@
       </div>
       <!--Search bar-->
       <input class="searchBar" type="text" placeholder="Search.." v-model="searchText" @input="fetchData">
-      
+
       <div class="checkoutBtn">
         <!--not enabled till something is in cart-->
         <button v-on:click="goToCheckout" :disabled="cart.length === 0 && showLessons">
@@ -56,13 +56,14 @@
     <main>
       <!--lessons page visible if showlessons is true-->
       <div v-if="showLessons" class="lessonWrap">
-        <div v-for="lesson in sortedLessons" :key="lesson.id" class="lessonBox">
+        <div v-for="lesson in sortedLessons" :key="lesson.id" class="lessonBox"> <!--for each lessons show a box-->
 
           <div class="headtwo">
             <h2>{{lesson.title}}</h2>
           </div>
           <!--connecting my images-->
-          <img :src="`https://express-backend-0l2f.onrender.com${lesson.image}`" :alt="lesson.title" width="350" height="300">
+          <img :src="`https://express-backend-0l2f.onrender.com${lesson.image}`" :alt="lesson.title" width="350"
+            height="300">
           <p>Availability: {{lesson.availability}}</p>
           <p>Location: {{lesson.location}}</p>
           <p>Price: £{{lesson.price}}</p> <!--better syntax practice than 'vtext'-->
@@ -86,7 +87,7 @@
             <p> Items in cart:{{cartItemAmount}}</p>
             <p>Lessons in cart:</p>
 
-            <!-- displays lessons, id to keep track-->
+            <!-- displays lessons, id to keep track, give-->
             <div v-for="(lesson, index) in cart" :key="lesson.id">
               {{ lesson.title}} £{{ lesson.price }} </div>
           </div>
